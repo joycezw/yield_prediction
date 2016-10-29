@@ -42,21 +42,26 @@ plot.absolute.error.boxplot <- function(data,
 
     # create ggplot object h
     h <- ggplot2::ggplot(data.reformatted,
-                         ggplot2::aes(x = cut(data.reformatted[[objective.field]], breaks = breaks),
+                         ggplot2::aes(x = cut(data.reformatted[[objective.field]],
+                                              breaks = breaks),
                                       y = data.reformatted$absolute.error)) +
-        ggplot2::geom_boxplot(aes(color = factor(variable))) +
+        ggplot2::geom_boxplot(ggplot2::aes(color = factor(variable))) +
         ggplot2::xlab(xlabel) +
         ggplot2::ylab(ylabel) +
         ggplot2::theme_bw() +
-        ggplot2::theme(strip.background = ggplot2::element_rect(colour = "white", fill = "white"),
+        ggplot2::theme(strip.background = ggplot2::element_rect(colour = "white",
+                                                                fill = "white"),
                        strip.text = ggplot2::element_text(colour = "black"),
                        legend.direction = "horizontal",
                        legend.justification = "center",
-                       legend.key = ggplot2::element_rect(fill = "white", color = "white"),
-                       legend.background = ggplot2::element_rect(fill = "white", colour = "white"),
+                       legend.key = ggplot2::element_rect(fill = "white",
+                                                          colour = "white"),
+                       legend.background = ggplot2::element_rect(fill = "white",
+                                                                 colour = "white"),
                        legend.position = "bottom",
                        legend.title = ggplot2::element_blank(),
-                       panel.grid.major = ggplot2::element_line(linetype = "dashed", colour = "grey40"),
+                       panel.grid.major = ggplot2::element_line(linetype = "dashed",
+                                                                colour = "grey40"),
                        panel.grid.minor = ggplot2::element_blank(),
                        axis.text = ggplot2::element_text(colour = "black"))
 
@@ -102,42 +107,37 @@ lasso.fit <- glmnet::glmnet(x = x,
                             nlambda = 50,
                             alpha = 1,
                             standardize = TRUE)
-coef(lasso.fit,
-     s = c(fit$lambda[23], 0.1))
+coef(lasso.fit, s = c(fit$lambda[23], 0.1))
 plot(lasso.fit, xvar = "lambda", label = TRUE)
-out.lasso <- predict(lasso.fit,
-                     newx = x,
+out.lasso <- predict(lasso.fit, newx = x,
                      s = c(fit$lambda[23], 0.1),
                      type = "link")
 data$lasso <- (out.lasso[, 1] + out.lasso[, 2]) / 2
 
-ggplot2::ggplot(reshape::melt(data,
-                              measure.vars = c("original.thompson",
-                                               "modified.thompson",
-                                               "lasso")),
-                aes(x = detrended.harvested.yield.bu.per.acre,
-                    y = value)) +
-    geom_point(aes(color = factor(variable))) +
+ggplot2::ggplot(reshape2::melt(data,
+                               measure.vars = c("original.thompson",
+                                                "modified.thompson",
+                                                "lasso")),
+                ggplot2::aes(x = detrended.harvested.yield.bu.per.acre,
+                             y = value)) +
+    ggplot2::geom_point(ggplot2::aes(color = factor(variable))) +
     ggplot2::xlab("De-trended Harvested yield (bu/acre)") +
     ggplot2::ylab("Modeled de-trended Harvested yield (bu/acre)") +
-    geom_abline(intercept = 0,
-                slope = 1,
-                color = "gray")
-
+    ggplot2::geom_abline(intercept = 0,
+                         slope = 1,
+                         color = "gray")
 
 # scatterplot colored by RID
-
 if (resolution == "CRD") {
-
-    h <- ggplot2::ggplot(reshape::melt(data, measure.vars = c("original.thompson",
-                                                              "modified.thompson")),
-                         ggplot2::aes(x = planted.yield.bu.per.acre, y = value)) +
-        geom_point(aes(color = as.factor(RID),
-                       shape = as.factor(variable)), size = 2.5) +
+    ggplot2::ggplot(reshape2::melt(data,
+                                   measure.vars = c("original.thompson",
+                                                    "modified.thompson")),
+                    ggplot2::aes(x = planted.yield.bu.per.acre,
+                                 y = value)) +
+        ggplot2::geom_point(ggplot2::aes(color = as.factor(RID),
+                                         shape = as.factor(variable)), size = 2.5) +
         ggplot2::xlab("Yield (bu/acre)") +
         ggplot2::ylab("Predicted yield (modified Thompson, bu/acre)") +
         ggplot2::geom_abline(intercept = 0, slope = 1, color = "gray") +
         ggplot2::theme_linedraw()
-    h
 }
-
