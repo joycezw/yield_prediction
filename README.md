@@ -1,7 +1,4 @@
-# Yield Prediction Project
-## To predict corn yield  based on historical yield and weather information
-
-Specific tasks include:  
+# Yield Prediction based on historical yield and weather information
 1. Literature review and quantity the effect of improvements in technology on yield responses  
 2. Implement the Thompson's model (original and modified)  
 3. Analyze model performance, strengths, weaknesses and effect of resolution  
