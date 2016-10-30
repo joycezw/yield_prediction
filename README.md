@@ -11,7 +11,7 @@ Specific tasks include:
 [main.R](./main.R) contains codes that implementate prediction models and analysis yield responses.  
 [utils.R](./utils.R) contains data processing functions, model implementation functions and plotting functions.  
 [backup.R](./backup.R) contains codes that was not used for final results.  
-[IA Data - Corn Yield - CRD.csv](./IA\ Data\ -\ Corn\ Yield\ -\ CRD.csv), [IA Data - Corn Yield - State.csv](./IA\ Data\ -\ Corn\ Yield\ -\ State.csv), [IA Data - Weather - CRD.csv](./IA\ Data\ -\ Weather\ -\ CRD.csv), [IA Data - Weather - State.csv](./IA\ Data\ -\ Weather\ -\ State.csv) contains corn yield and weather data at Crop Reporting District (CRD) and State levels collected from [National Agricultura Statistics Servise](https://www.nass.usda.gov/Charts_and_Maps/Crops_County/boundary_maps/indexgif.php).  
+[IA Data - Corn Yield - CRD.csv](./IA\ Data\ -\ Corn\ Yield\ -\ CRD.csv), [IA Data - Corn Yield - State.csv](./IA\ Data\ -\ Corn\ Yield\ -\ State.csv), [IA Data - Weather - CRD.csv](./IA\ Data\ -\ Weather\ -\ CRD.csv), [IA Data - Weather - State.csv](./IA\ Data\ -\ Weather\ -\ State.csv) contain corn yield and weather data at Crop Reporting District (CRD) and State levels collected from [National Agricultura Statistics Servise](https://www.nass.usda.gov/Charts_and_Maps/Crops_County/boundary_maps/indexgif.php).  
 
 Five yield prediction models and improvements are implemented:  
 - Original Thompson's model  
